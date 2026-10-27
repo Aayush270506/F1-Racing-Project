@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ heading }} · F1 Race Intelligence{% endblock %}
+
+{% block head %}
+{% if src %}
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="wrap wrap-wide">
+    <p class="kicker">{{ kicker }}</p>
+    <h1>{{ heading }}</h1>
+    <p>{{ intro }}</p>
+    {% if src %}
+    <div class="actions">
+      <a class="btn btn-ghost" href="{{ src }}" target="_blank" rel="noopener">Open on Tableau Public ↗</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="wrap wrap-wide">
+  {% if src %}
+  <div class="viz-frame">
+    <tableau-viz src="{{ src }}" toolbar="bottom" hide-tabs></tableau-viz>
+  </div>
+  {% else %}
+  <div class="viz-frame viz-empty">
+    <h2>Tableau link not set yet</h2>
+    <p>Open <code>config.py</code>, paste your Tableau Public link into <code>{{ setting }}</code>,
+      then restart the app.</p>
+  </div>
+  {% endif %}
+
+  {% if scenes %}
+  <section class="scenes" aria-labelledby="scenes-title">
+    <h2 id="scenes-title">Scenes in this story</h2>
+    <ol>
+      {% for scene in scenes %}
+      <li><span class="card-num">{{ "%02d" % loop.index }}</span>{{ scene }}</li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

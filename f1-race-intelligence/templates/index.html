@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <div class="wrap">
+    <p class="kicker">2010 to 2026 · Tableau analytics</p>
+    <h1>Formula 1 <span>Race Intelligence</span></h1>
+    <p class="lede">Seventeen seasons of race results, qualifying, lap data and championship standings,
+      explored through an interactive Tableau dashboard and a nine-scene data story.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="{{ url_for('dashboard') }}">Open the dashboard</a>
+      <a class="btn btn-ghost" href="{{ url_for('story') }}">Read the story</a>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-label="At a glance">
+  <div class="wrap">
+    <div class="kpis">
+      {% for kpi in kpis %}
+      <div class="kpi">
+        <div class="kpi-value">{{ kpi.value }}</div>
+        <div class="kpi-label">{{ kpi.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="views-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="views-title">Nine views, one dashboard</h2>
+      <p>Each sheet answers one question about drivers, teams, circuits or strategy. Together they
+        make up the dashboard, and each one is a scene in the story.</p>
+    </div>
+    <ol class="card-grid">
+      {% for visual in visuals %}
+      <li class="card">
+        <span class="card-num">{{ "%02d" % loop.index }}</span>
+        <span class="tag">{{ visual.chart }}</span>
+        <h3>{{ visual.title }}</h3>
+        <p>{{ visual.text }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="filters-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="filters-title">Explore with filters</h2>
+      <p>Three global controls sit at the top of the dashboard. Every chart responds to them.</p>
+    </div>
+    <ul class="card-grid card-grid-3">
+      {% for filter in filters %}
+      <li class="card">
+        <span class="tag">{{ filter.kind }}</span>
+        <h3>{{ filter.name }}</h3>
+        <p>{{ filter.text }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="data-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="data-title">The data</h2>
+      <p>Five sheets from one Excel workbook, related in Tableau on <code>race_id</code> and
+        <code>circuit_id</code> and loaded as an extract.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Sheet</th><th scope="col">What it holds</th><th scope="col" class="num">Rows</th><th scope="col" class="num">Columns</th></tr>
+        </thead>
+        <tbody>
+          {% for sheet in sheets %}
+          <tr>
+            <th scope="row"><code>{{ sheet.name }}</code></th>
+            <td>{{ sheet.text }}</td>
+            <td class="num">{{ sheet.rows }}</td>
+            <td class="num">{{ sheet.cols }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">Total</th><td>5 sheets</td><td class="num">13,748</td><td class="num">91</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
