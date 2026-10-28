@@ -9,6 +9,7 @@ __pycache__/
 .env.*
 .claude/
 
-# Excel lock files and packaged copies
+# Excel and Tableau lock/recovery files, packaged copies
 ~$*
+*.twbr
 *.zip
