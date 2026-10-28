@@ -84,5 +84,6 @@ venv\Scripts\python.exe -m pip install -r requirements.txt
 venv\Scripts\python.exe app.py
 ```
 
-Then open http://127.0.0.1:5000. The embedded views load from Tableau Public, so the computer
-needs internet access and the workbook must be public (not hidden) on the Tableau Public profile.
+Then open https://f1-racing-project.onrender.com.
+
+The embedded views load from Tableau Public, so the computer needs internet access and the workbook must be public (not hidden) on the Tableau Public profile.
