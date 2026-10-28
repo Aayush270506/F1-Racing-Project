@@ -27,6 +27,24 @@
   </div>
 </section>
 
+<section class="section" aria-labelledby="users-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="users-title">Who it's for</h2>
+      <p>Three analysts, three questions. Each one is answered by a part of the dashboard.</p>
+    </div>
+    <ul class="card-grid card-grid-3">
+      {% for case in use_cases %}
+      <li class="card">
+        <span class="tag">{{ case.who }}</span>
+        <h3>{{ case.name }}</h3>
+        <p>{{ case.text }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
 <section class="section" aria-labelledby="views-title">
   <div class="wrap">
     <div class="section-head">
@@ -51,7 +69,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2 id="filters-title">Explore with filters</h2>
-      <p>Three global controls sit at the top of the dashboard. Every chart responds to them.</p>
+      <p>Two filters and one parameter sit at the top of the dashboard, next to the KPI cards.</p>
     </div>
     <ul class="card-grid card-grid-3">
       {% for filter in filters %}

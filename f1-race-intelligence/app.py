@@ -19,7 +19,7 @@ VISUALS = [
     {"title": "KPI Summary Cards", "chart": "KPI cards",
      "text": "Competing teams, seasons, race outcomes and circuits at a glance."},
     {"title": "Global Driver Distribution Across Grand Prix Nations", "chart": "Geographic map",
-     "text": "Where the races are held and how driver entries spread across host countries."},
+     "text": "Driver entries in each host nation, with circles sized by the number of entries."},
     {"title": "Driver Reliability Analysis", "chart": "Stacked bar",
      "text": "Retirements per driver, split by DNF reason."},
     {"title": "Driver Performance Leaderboard", "chart": "Vertical bar · Top N",
@@ -27,11 +27,11 @@ VISUALS = [
     {"title": "Team Performance Ranking", "chart": "Horizontal bar",
      "text": "Constructors ranked by total points across the selected seasons."},
     {"title": "Team Championship Performance Analysis", "chart": "Grouped bar",
-     "text": "Season-by-season championship results, team against team."},
+     "text": "Season-by-season championship points for Red Bull Racing, Mercedes, Ferrari and McLaren."},
     {"title": "Tyre Compound Usage Distribution", "chart": "Pie chart",
-     "text": "Share of soft, medium, hard and intermediate tyres."},
-    {"title": "Country-wise Race Participation", "chart": "Treemap / highlight table",
-     "text": "Race entries by host country, sized and shaded by volume."},
+     "text": "Share of laps run on soft, medium, hard and intermediate tyres."},
+    {"title": "Country-wise Race Participation", "chart": "Treemap",
+     "text": "Grands Prix hosted by each country, sized and shaded by count."},
     {"title": "Podium Achievements by Driver and Team", "chart": "Packed bubbles",
      "text": "Podium finishes per driver, bubbles sized by count and coloured by team."},
 ]
@@ -51,23 +51,35 @@ SHEETS = [
 
 FILTERS = [
     {"name": "DNF Reason", "kind": "Dropdown filter",
-     "text": "Narrows the reliability chart and race results to one cause of retirement."},
-    {"name": "Year of Race Date", "kind": "Season filter",
-     "text": "Isolates a single season or compares a range, from 2010 to 2026, across every chart."},
+     "text": "Narrows the reliability chart to chosen causes: Engine, Hydraulics, Mechanical, Brake failure, "
+             "Gearbox or Collision."},
+    {"name": "Year of Race Date", "kind": "Year filter",
+     "text": "Isolates one year or compares several, from 2010 to 2026, across every race chart."},
     {"name": "Top N", "kind": "Parameter · default 10",
      "text": "Sets how many drivers the performance leaderboard shows."},
 ]
 
+USE_CASES = [
+    {"who": "Team Strategist", "name": "Rajan",
+     "text": "Compares championship points with Red Bull Racing and Mercedes, reviews tyre strategy and "
+             "spots top drivers for recruitment."},
+    {"who": "Broadcast Analyst", "name": "Divya",
+     "text": "Pulls driver rankings, the countries hosting the most Grands Prix and podiums by driver and "
+             "team for coverage."},
+    {"who": "FIA Analyst", "name": "Arvind",
+     "text": "Analyses DNFs by driver, failure type and season to judge whether reliability is improving."},
+]
+
 STORY_SCENES = [
-    "The global scale of the grid",
-    "Where drivers race",
-    "Driver reliability and DNFs",
-    "Driver performance leaderboard",
-    "Team performance ranking",
-    "Season-by-season championships",
-    "Tyre strategy patterns",
-    "Country-level participation",
-    "Podium achievements",
+    "Global F1 Overview",
+    "Global Driver Distribution",
+    "Driver Reliability and DNF Analysis",
+    "Driver Performance",
+    "Team Performance",
+    "Championship Trends",
+    "Tyre Strategy",
+    "Country-wise Participation",
+    "Podium Achievements",
 ]
 
 
@@ -85,7 +97,7 @@ def embed_src(link):
 
 @app.route("/")
 def home():
-    return render_template("index.html", kpis=KPIS, visuals=VISUALS, sheets=SHEETS, filters=FILTERS)
+    return render_template("index.html", kpis=KPIS, visuals=VISUALS, sheets=SHEETS, filters=FILTERS, use_cases=USE_CASES)
 
 
 @app.route("/dashboard")
