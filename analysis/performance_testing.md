@@ -31,13 +31,22 @@ Excel file; every observed value is what Tableau showed in its status bar (marks
 
 ## Filters and parameter
 
+T1b and T2 were checked in Tableau Public Desktop. All tests were then repeated on the published
+dashboard in a browser, by applying the filters through Tableau's Embedding API and summing the data
+each chart returned.
+
 | Test | Setting | Expected | Observed | Result |
 | --- | --- | --- | --- | --- |
-| T1b | Year of Race Date = 2024, leaderboard | 10 drivers, 1,955 points | 10 marks, SUM(points) 1,955 | Pass |
-| T2 | DNF Reason = Engine, reliability chart | 16 drivers, 73 DNFs | 16 rows, SUM(DNF Count) 73 | Pass |
-| T1 | Year of Race Date = 2024, team ranking | 10 teams, 2,102 points | Not captured | Pending |
-| T3 | Top N = 5, leaderboard | 5 drivers, 19,039 points | Not run yet | Pending |
-| T4 | Year 2024 + DNF Reason Engine | 2 DNFs, 2 drivers | Not run yet | Pending |
+| T1 | Year of Race Date = 2024, team ranking | 10 teams, 2,102 points | 10 teams, 2,102 points | Pass |
+| T1b | Year of Race Date = 2024, leaderboard | 10 drivers, 1,955 points | 10 drivers, 1,955 points | Pass |
+| T1c | Year of Race Date = 2024, KPI Race Outcomes | 440 | 440 | Pass |
+| T1d | Year of Race Date = 2024, reliability chart | 28 DNFs | 28 DNFs | Pass |
+| T2 | DNF Reason = Engine, reliability chart | 16 drivers, 73 DNFs | 16 drivers, 73 DNFs | Pass |
+| T3 | Top N = 5, leaderboard | 5 drivers, 19,039 points | 5 drivers, 19,039 points | Pass |
+| T3b | Top N changed from 5 to 10 | 10 drivers, 28,403 points | 10 drivers, 28,403 points | Pass |
+| T4 | Year 2024 + DNF Reason Engine, reliability chart | 2 DNFs, 2 drivers | 2 DNFs, 2 drivers | Pass |
+| T5 | DNF Reason = Engine does not change the team ranking | 2,102 (2024) unchanged | 2,102 | Pass |
+| T6 | Clear all filters | 396 DNFs, 31,906 points | 396 DNFs, 31,906 points | Pass |
 
 No filter produced duplicated rows or inflated totals: every observed total equals the pandas total.
 
@@ -52,7 +61,8 @@ Measured from Tableau's own log for one run that opened the workbook on the reli
 | Reliability chart query | 0.055 s |
 | Slowest chart render (visual model update) | 0.10 s |
 
-This is a single measurement on one laptop; it is not an average.
+In the browser, the dashboard embedded in the Flask app became interactive 2.4 s after the page started
+loading (Tableau Public, one run). Both are single measurements on one laptop, not averages.
 
 ## Calculated fields
 
@@ -74,6 +84,20 @@ Only four calculated fields and one parameter are used; everything else comes st
 - The pie chart overflowed its tile; mark sizing was reset.
 - Coloured charts had no legends; legends were added to the dashboard and to the story scenes.
 - The grouped bar chart repeated a team label under every bar; the labels were hidden (the legend names the teams).
+
+## Published version on Tableau Public
+
+The web app embeds "T3 dashboard" and "T3 Story" on Tableau Public. They match
+`tableau/F1_Race_Intelligence.twbx` except for two settings: they were published from a test copy
+with Top N preset to 5, and the dashboard was resized before publishing.
+
+| Setting | In the .twbx | In the published version | Effect |
+| --- | --- | --- | --- |
+| Dashboard size | 1400 × 1720 | 1000 × 800 | Charts are tighter; KPI numbers and some axis labels are clipped |
+| Top N default | 10 | 5 | The leaderboard opens with 5 drivers; the slider still goes up to 19 |
+
+All filter results above were measured on the published version and are unaffected. Republishing the
+.twbx unchanged would restore both settings.
 
 ## Known log message
 

@@ -38,7 +38,16 @@ f1-race-intelligence/         Flask web app that embeds the published dashboard 
 | 4. Dashboard | "F1 Race Intelligence Dashboard": dark F1 theme, title, 4 KPI cards and 3 controls on top, then three rows of charts with legends. | `tableau/` |
 | 5. Story | "F1 Race Intelligence Story": 9 scenes. Each scene is a small dashboard with a one-line finding (computed from the data) above its chart. | `tableau/` |
 | 6. Performance Testing | Every chart, KPI and filter checked against expected values, plus measured load times: [analysis/performance_testing.md](analysis/performance_testing.md). | `analysis/` |
-| 7. Web Integration | Dashboard and story published to Tableau Public and embedded in the Flask app. | `f1-race-intelligence/` |
+| 7. Web Integration | Dashboard and story published to Tableau Public (links below) and embedded in the Flask app. | `f1-race-intelligence/` |
+
+Published views on Tableau Public:
+
+- Dashboard: https://public.tableau.com/views/T3dashboard/F1RaceIntelligenceDashboard
+- Story: https://public.tableau.com/views/T3Story/F1RaceIntelligenceStory
+
+These were published from a test copy with Top N preset to 5, and the dashboard was resized to
+1000 × 800 before publishing; the `.twbx` in this repository uses 10 and 1400 × 1720. See
+[analysis/performance_testing.md](analysis/performance_testing.md#published-version-on-tableau-public).
 
 ## Data notes
 

@@ -8,5 +8,5 @@ variable). Any form of Tableau Public link works:
 """
 import os
 
-TABLEAU_DASHBOARD_URL = os.environ.get("TABLEAU_DASHBOARD_URL", "https://public.tableau.com/views/f1races1d2/Dashboard2")
-TABLEAU_STORY_URL = os.environ.get("TABLEAU_STORY_URL", "https://public.tableau.com/views/story1_17931358074450/Story1")
+TABLEAU_DASHBOARD_URL = os.environ.get("TABLEAU_DASHBOARD_URL", "https://public.tableau.com/views/T3dashboard/F1RaceIntelligenceDashboard")
+TABLEAU_STORY_URL = os.environ.get("TABLEAU_STORY_URL", "https://public.tableau.com/views/T3Story/F1RaceIntelligenceStory")
