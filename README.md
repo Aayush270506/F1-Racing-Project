@@ -16,7 +16,7 @@ It is built for three users:
 
 | | |
 | --- | --- |
-| **Demo Link** | _To be added_ |
+| **Demo Link** | https://drive.google.com/file/d/1gVc8jdgJn7Jaagur0_BDfsivbluISHhs/view?usp=sharing |
 | **GitHub Link** | https://github.com/Aayush270506/F1-Racing-Project |
 | **Dashboard** | https://public.tableau.com/views/T3dashboard/F1RaceIntelligenceDashboard |
 | **Story link** | https://public.tableau.com/views/T3Story/F1RaceIntelligenceStory |
